@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tcl.mp.entity.Person;
 import com.tcl.mp.enums.GenderEnum;
 import com.tcl.mp.mapper.PersonMapper;
@@ -35,9 +36,10 @@ class MybatisPlusApplicationTests {
     void testInsert() {
         log.info("测试插入");
         Person person = new Person();
-        person.setName("hundanli");
-        person.setAge(20);
-        person.setEmail("hundanli@qq.com");
+        person.setName("li");
+        person.setAge(22);
+        person.setEmail("li@qq.com");
+        person.setGender(GenderEnum.MALE);
         int insert = personMapper.insert(person);
         log.info("插入成功数量：" + insert);
         Long id = person.getId();
@@ -84,5 +86,12 @@ class MybatisPlusApplicationTests {
         Person person = personMapper.selectOne(null);
         updateWrapper.set(Person::getGender, GenderEnum.FEMALE);
         personMapper.update(person, updateWrapper);
+    }
+
+    @Test
+    void testPage() {
+        Page<Person> page = new Page<>(1, 5);
+        page = personMapper.selectPage(page, null);
+        page.getRecords().forEach(System.out::println);
     }
 }
