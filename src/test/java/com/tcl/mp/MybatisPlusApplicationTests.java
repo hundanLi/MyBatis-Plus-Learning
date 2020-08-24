@@ -1,6 +1,11 @@
 package com.tcl.mp;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.tcl.mp.entity.Person;
+import com.tcl.mp.enums.GenderEnum;
 import com.tcl.mp.mapper.PersonMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
@@ -31,10 +36,53 @@ class MybatisPlusApplicationTests {
         log.info("测试插入");
         Person person = new Person();
         person.setName("hundanli");
+        person.setAge(20);
+        person.setEmail("hundanli@qq.com");
         int insert = personMapper.insert(person);
         log.info("插入成功数量：" + insert);
         Long id = person.getId();
         log.info("自动生成主键："+id);
     }
 
+
+    @Test
+    void testQueryWrapper() {
+        QueryWrapper<Person> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("email", "hundanli@qq.com");
+        Person person = personMapper.selectOne(queryWrapper);
+        System.out.println(person);
+
+    }
+
+    @Test
+    void testLambdaQueryWrapper() {
+        LambdaQueryWrapper<Person> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Person::getEmail, "hundanli@qq.com");
+        System.out.println(personMapper.selectOne(queryWrapper));
+    }
+
+
+    @Test
+    void testUpdate() {
+        UpdateWrapper<Person> updateWrapper = new UpdateWrapper<>();
+        Person person = personMapper.selectOne(null);
+        person.setGender(GenderEnum.FEMALE);
+        personMapper.updateById(person);
+    }
+
+    @Test
+    void testUpdateWrapper() {
+        UpdateWrapper<Person> updateWrapper = new UpdateWrapper<>();
+        Person person = personMapper.selectOne(null);
+        updateWrapper.set("gender", GenderEnum.FEMALE);
+        personMapper.update(person, updateWrapper);
+    }
+
+    @Test
+    void testLambdaUpdateWrapper() {
+        LambdaUpdateWrapper<Person> updateWrapper = new LambdaUpdateWrapper<>();
+        Person person = personMapper.selectOne(null);
+        updateWrapper.set(Person::getGender, GenderEnum.FEMALE);
+        personMapper.update(person, updateWrapper);
+    }
 }
