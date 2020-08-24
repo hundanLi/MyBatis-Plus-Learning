@@ -21,7 +21,7 @@ class MybatisPlusApplicationTests {
     void selectAll() {
         log.info("测试查询");
         List<Person> people = personMapper.selectList(null);
-        Assertions.assertEquals(5, people.size());
+        Assertions.assertEquals(1, people.size());
         people.forEach(System.out::println);
 
     }

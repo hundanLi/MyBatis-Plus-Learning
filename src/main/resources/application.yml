@@ -3,3 +3,6 @@ spring:
     url: jdbc:mysql://localhost:3306/mybatis_plus?serverTimezone=Asia/Shanghai
     username: root
     password: root
+
+mybatis-plus:
+  type-enums-package: com.tcl.mp.enums

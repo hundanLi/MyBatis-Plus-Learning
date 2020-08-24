@@ -1,5 +1,6 @@
 package com.tcl.mp.entity;
 
+import com.tcl.mp.enums.GenderEnum;
 import lombok.Data;
 
 /**
@@ -13,4 +14,5 @@ public class Person {
     private String name;
     private Integer age;
     private String email;
+    private GenderEnum gender;
 }
