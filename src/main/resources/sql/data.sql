@@ -1,6 +1,6 @@
-DELETE FROM user;
+DELETE FROM person;
 
-INSERT INTO user (id, name, age, email) VALUES
+INSERT INTO person (id, name, age, email) VALUES
 (1, 'Jone', 18, 'test1@tcl.com'),
 (2, 'Jack', 20, 'test2@tcl.com'),
 (3, 'Tom', 28, 'test3@tcl.com'),

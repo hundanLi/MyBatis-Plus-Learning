@@ -1,7 +1,7 @@
 package com.tcl.mp;
 
-import com.tcl.mp.entity.User;
-import com.tcl.mp.mapper.UserMapper;
+import com.tcl.mp.entity.Person;
+import com.tcl.mp.mapper.PersonMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,15 +15,26 @@ import java.util.List;
 class MybatisPlusApplicationTests {
 
     @Autowired
-    UserMapper userMapper;
+    PersonMapper personMapper;
 
     @Test
     void selectAll() {
         log.info("测试查询");
-        List<User> users = userMapper.selectList(null);
-        Assertions.assertEquals(5, users.size());
-        users.forEach(System.out::println);
+        List<Person> people = personMapper.selectList(null);
+        Assertions.assertEquals(5, people.size());
+        people.forEach(System.out::println);
 
+    }
+
+    @Test
+    void testInsert() {
+        log.info("测试插入");
+        Person person = new Person();
+        person.setName("hundanli");
+        int insert = personMapper.insert(person);
+        log.info("插入成功数量：" + insert);
+        Long id = person.getId();
+        log.info("自动生成主键："+id);
     }
 
 }

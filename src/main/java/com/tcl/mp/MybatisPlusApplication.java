@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * MapperScan 扫描Mapper目录
  */
 @SpringBootApplication
-@MapperScan(basePackages = "com.tcl.mp.mapper")
+@MapperScan(basePackages = "com.tcl.mp")
 public class MybatisPlusApplication {
 
     public static void main(String[] args) {
