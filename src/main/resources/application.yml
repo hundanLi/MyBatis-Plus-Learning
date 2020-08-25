@@ -6,3 +6,6 @@ spring:
 
 mybatis-plus:
   type-enums-package: com.tcl.mp.enums
+  configuration:
+    use-generated-keys: true
+

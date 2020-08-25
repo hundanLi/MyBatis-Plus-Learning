@@ -2,6 +2,7 @@ package com.tcl.mp.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.tcl.mp.enums.GenderEnum;
 import lombok.Data;
 
@@ -18,4 +19,6 @@ public class Person {
     private Integer age;
     private String email;
     private GenderEnum gender;
+    @TableLogic(value = "0")
+    private Byte isDeleted;
 }

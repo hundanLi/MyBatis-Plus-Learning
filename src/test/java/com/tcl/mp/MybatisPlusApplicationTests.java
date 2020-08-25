@@ -43,7 +43,7 @@ class MybatisPlusApplicationTests {
         int insert = personMapper.insert(person);
         log.info("插入成功数量：" + insert);
         Long id = person.getId();
-        log.info("自动生成主键："+id);
+        log.info("自动生成主键：" + id);
     }
 
 
@@ -66,7 +66,6 @@ class MybatisPlusApplicationTests {
 
     @Test
     void testUpdate() {
-        UpdateWrapper<Person> updateWrapper = new UpdateWrapper<>();
         Person person = personMapper.selectOne(null);
         person.setGender(GenderEnum.FEMALE);
         personMapper.updateById(person);
@@ -93,5 +92,13 @@ class MybatisPlusApplicationTests {
         Page<Person> page = new Page<>(1, 5);
         page = personMapper.selectPage(page, null);
         page.getRecords().forEach(System.out::println);
+    }
+
+    @Test
+    void testLogicDelete() {
+        Person person = personMapper.selectById(1295325847524339715L);
+        int i = personMapper.deleteById(person.getId());
+        Assertions.assertEquals(1, i);
+
     }
 }
