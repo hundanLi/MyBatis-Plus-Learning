@@ -1,10 +1,10 @@
 package com.tcl.mp.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.*;
 import com.tcl.mp.enums.GenderEnum;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 /**
  * @author li
@@ -21,4 +21,11 @@ public class Person {
     private GenderEnum gender;
     @TableLogic(value = "0")
     private Byte isDeleted;
+
+    // 自动填充策略
+
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
 }

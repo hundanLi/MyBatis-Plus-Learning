@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @SpringBootTest
@@ -101,4 +102,35 @@ class MybatisPlusApplicationTests {
         Assertions.assertEquals(1, i);
 
     }
+
+    @Test
+    void testAutoFillInsert() {
+        Person person = new Person();
+        person.setName("gao");
+        person.setGender(GenderEnum.FEMALE);
+        person.setEmail("gao@qq.com");
+        person.setAge(22);
+        personMapper.insert(person);
+        log.warn(person.toString());
+    }
+
+    @Test
+    void testAutoFillUpdate() throws InterruptedException {
+        Person person = new Person();
+        person.setName("gao");
+        person.setGender(GenderEnum.FEMALE);
+        person.setEmail("gao@qq.com");
+        person.setAge(22);
+        personMapper.insert(person);
+        log.warn(person.toString());
+
+        TimeUnit.SECONDS.sleep(10);
+        person.setName("gaoxiaoyan");
+        person.setEmail("gaoxiaoyan@qq.com");
+        person.setCreateTime(null);
+        person.setUpdateTime(null);
+        personMapper.updateById(person);
+
+    }
+
 }
